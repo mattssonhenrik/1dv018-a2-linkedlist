@@ -21,25 +21,67 @@ public class MyLinkedList {
             currentLastNode.nextNode = newNode;
             listSize++;
         }
-
-        // } else if (head.nextNode == null) {
-        // head.nextNode = newNode;
-        // } else if (head.nextNode != null) {
-        // MyNode nextNodeInLine = head.nextNode;
-        // while (nextNodeInLine.nextNode != null) {
-        // nextNodeInLine = nextNodeInLine.nextNode;
-        // }
-        // nextNodeInLine = newNode.nextNode;
-        // }
-        // return newNode;
     }
 
-    /// FLYtta till en app kanske igen?
+    public void removeNode(int deleteValue) {
+        // Check first node
+        if (head == null) {
+            // Or throw error?
+            return;
+        }
+        if (head.value == deleteValue) {
+            head = head.nextNode;
+            listSize--;
+            return;
+        }
+        // Check the rest of the nodes after head
+        MyNode firstNodeToConnect = head;
+        while (firstNodeToConnect.nextNode != null && firstNodeToConnect.nextNode.value != deleteValue) {
+            firstNodeToConnect = firstNodeToConnect.nextNode;
+        }
+        if (firstNodeToConnect.nextNode != null) {
+            firstNodeToConnect.nextNode = firstNodeToConnect.nextNode.nextNode;
+            listSize--;
+            return;
+        }
+        // Add a throw or return a boolean instead of "failing silently" when the number
+        // is not in the list?
+    }
+
+    public int getSize() {
+        return listSize;
+    }
+
+    public boolean isEmpty() {
+        return listSize == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        MyNode nodeValue = head;
+        while (nodeValue != null) {
+            stringBuilder.append(nodeValue.value);
+            nodeValue = nodeValue.nextNode;
+            if (nodeValue != null)
+                stringBuilder.append(", ");
+        }
+        return stringBuilder.toString();
+    }
+
     public static void main(String[] args) {
-        MyLinkedList linkedList = new MyLinkedList();
-        linkedList.addNode(1);
-        linkedList.addNode(2);
-        System.out.println(linkedList.toString());
-        System.out.println("Is this running?");
+        MyLinkedList myLinkedList = new MyLinkedList();
+
+        System.out.println(myLinkedList.isEmpty());
+        for (int i = 0; i < 10; i++) {
+            myLinkedList.addNode(i);
+        }
+        System.out.println(myLinkedList);
+        System.out.println(myLinkedList.getSize());
+        myLinkedList.removeNode(5);
+
+        System.out.println(myLinkedList);
+        System.out.println(myLinkedList.getSize());
+        System.out.println(myLinkedList.isEmpty());
     }
 }
