@@ -1,7 +1,10 @@
 ## Run
 ./gradlew run
 
-## Rapport
+# Testa  
+Ändra valfri data under filen MyLinkedList.java och kör `gradle run` eller `./gradlew run` igen.  
+
+# Rapport (finns egen fil, utökad med uppgift 5 i mappen rapport)
 Fördelen med en linked list i kontrast till en arraylist är att en linked list är att varje två element i listan utgör ett "par" som går att hantera utan att skapa hålrum i listan. Eftersom en lista inte kan och ska ha hålrum är detta en stor fördel vid stort antal element i listan gentemot en arraylist. 
 
 Om vi exempelvis vill ta bort ett element ur listan kan vi därmed helt enkelt säga åt ett element att sluta peka på nästa element i listan utan att peka på nästnästa element i listan. På så vis "klipper" vi bort ett element ur listan som sedan kommer att hanteras automatiskt av vår garbage collector. Denna operation är av konstant tid O(1), däremot måste vi söka fram elementet innan vi kan ta bort det och detta är beroende på var i listan elementet ligger vilket är en kostnad av O(n). En Arraylist svaghet i detta sammanhang är att den har inte referenser på detta vis utan att varje element har ett unikt index, och eftersom vi inte får ha hålrum i listan, när vi då tar bort ett index måste den därefter skifta hela listan och finns det därmed många efterföljande element i listan växer tiden linjärt O(N), om vi är i första delen av listan tar det alltså väldigt lång tid medan om vi är i slutet av listan tar det då kortare tid eftersom det är färre element att skifta, så att ta bort sista elementet blir O(1) eftersom vi inte har något mer att göra/element att skifta. Motpolen i den enkla länkade listan med det element vi ska ta bort som sista element blir det väldigt långsamt kontra om det ligger i början av listan går det väldigt fort, exempelvis första elementet vore O(1).
